@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수강생 학습·프로젝트 상담 설문</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">AX 과정 수강생 상담</p>
+      <h1>학습·프로젝트 상담 설문</h1>
+      <p>
+        현재 학습 상태와 프로젝트 참여 상황을 확인하기 위한 상담용 설문입니다.
+        정답은 없으므로 현재 상태를 편하게 작성해 주세요.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="message" class="message hidden"></div>
+
+    <form id="surveyForm">
+      <section class="card">
+        <div class="section-title">
+          <span>기본 정보</span>
+        </div>
+
+        <div class="grid two">
+          <label>
+            이름 <strong>*</strong>
+            <input type="text" id="student_name" maxlength="50" required>
+          </label>
+          <label>
+            팀명
+            <select id="team_name" disabled>
+              <option value="">팀 목록을 불러오는 중...</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>1</span><h2>수업 이해도</h2></div>
+
+        <p class="question">전체적인 수업 이해도는 어느 정도입니까? <strong>*</strong></p>
+        <div class="rating" data-name="understanding_level"></div>
+
+        <label>
+          잘 이해되는 부분
+          <textarea id="understanding_good" placeholder="예: Python 함수, SQL SELECT 문 등"></textarea>
+        </label>
+
+        <label>
+          어려운 부분
+          <textarea id="understanding_difficult" placeholder="예: JOIN, 비동기 처리, API 연결 등"></textarea>
+        </label>
+
+        <p class="question">영역별로 현재 비교적 이해가 잘 되는 분야를 선택해 주세요.</p>
+        <div class="check-grid" id="understanding_areas">
+          <p role="status">분야 목록을 불러오는 중...</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>2</span><h2>실습 수행 상태</h2></div>
+
+        <p class="question">실습 코드를 혼자 작성할 수 있는 정도는? <strong>*</strong></p>
+        <div class="rating" data-name="practice_level"></div>
+
+        <label>
+          현재 실습 단계 <strong>*</strong>
+          <select id="practice_status" required disabled>
+            <option value="">실습 단계 목록을 불러오는 중...</option>
+          </select>
+        </label>
+
+        <label>
+          실습 수행에 대한 추가 의견
+          <textarea id="practice_comment"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>3</span><h2>학습 중 가장 어려운 점</h2></div>
+
+        <div class="check-grid" id="hardest_points">
+          <p role="status">학습 어려움 목록을 불러오는 중...</p>
+        </div>
+
+        <label>
+          구체적으로 어떤 점이 어렵습니까?
+          <textarea id="hardest_comment"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>4</span><h2>복습 및 개인 학습 방법</h2></div>
+
+        <label>
+          수업 후 복습 빈도 <strong>*</strong>
+          <select id="review_frequency" required disabled>
+            <option value="">복습 빈도 목록을 불러오는 중...</option>
+          </select>
+        </label>
+
+        <label>
+          ChatGPT, Claude 등 AI 도구를 학습에 어떻게 활용하고 있습니까?
+          <textarea id="ai_learning_usage" placeholder="예: 에러 원인 질문, 코드 설명, 복습 문제 생성"></textarea>
+        </label>
+
+        <label>
+          부족한 부분을 보완하는 방법
+          <textarea id="improvement_method"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>5</span><h2>프로젝트 참여 상태</h2></div>
+
+        <div class="grid two">
+          <label>
+            현재 팀 내 역할
+            <input type="text" id="project_role" placeholder="예: 백엔드, DB, 발표">
+          </label>
+          <label>
+            앞으로 맡고 싶은 역할
+            <input type="text" id="desired_role" placeholder="예: 백엔드 API 개발">
+          </label>
+        </div>
+
+        <label>
+          협업 시 어려운 점
+          <textarea id="collaboration_difficulty"></textarea>
+        </label>
+        <label>
+          프로젝트에서 자신 있는 부분
+          <textarea id="project_strength"></textarea>
+        </label>
+        <label>
+          프로젝트에서 부담되는 부분
+          <textarea id="project_burden"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>6</span><h2>AI 코딩 도구 활용 수준</h2></div>
+
+        <p class="question">AI 코딩 도구 활용 수준은? <strong>*</strong></p>
+        <div class="rating" data-name="ai_tool_level"></div>
+
+        <p class="question">주로 어떤 목적으로 활용합니까?</p>
+        <div class="check-grid" id="ai_tool_usage">
+          <label><input type="checkbox" value="코드 생성"> 코드 생성</label>
+          <label><input type="checkbox" value="오류 분석"> 오류 분석</label>
+          <label><input type="checkbox" value="코드 설명"> 코드 설명</label>
+          <label><input type="checkbox" value="리팩터링"> 리팩터링</label>
+          <label><input type="checkbox" value="테스트 생성"> 테스트 생성</label>
+          <label><input type="checkbox" value="문서 작성"> 문서 작성</label>
+        </div>
+
+        <label>
+          AI가 생성한 코드를 어느 정도 이해하고 있습니까? <strong>*</strong>
+          <select id="code_understanding" required>
+            <option value="">선택하세요</option>
+            <option>거의 이해하지 못하고 사용한다</option>
+            <option>일부만 이해한다</option>
+            <option>전체 흐름은 이해한다</option>
+            <option>수정해서 사용할 수 있다</option>
+            <option>검증하고 개선할 수 있다</option>
+          </select>
+        </label>
+
+        <label>
+          AI 도구 활용에 대한 추가 의견
+          <textarea id="ai_tool_comment"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>7</span><h2>취업 및 진로 방향</h2></div>
+
+        <label>
+          희망 직무
+          <input type="text" id="desired_job" placeholder="예: 백엔드 개발자">
+        </label>
+
+        <p class="question">관심 분야를 선택해 주세요.</p>
+        <div class="check-grid" id="career_fields">
+          <p role="status">관심 분야 목록을 불러오는 중...</p>
+        </div>
+
+        <p class="question">현재 과정이 본인의 진로와 얼마나 잘 맞습니까? <strong>*</strong></p>
+        <div class="rating" data-name="course_career_fit"></div>
+
+        <label>
+          진로에 대해 고민되는 점
+          <textarea id="career_comment"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>8</span><h2>교육과정 및 강의에 대한 의견</h2></div>
+
+        <div class="grid two">
+          <label>
+            수업 속도 <strong>*</strong>
+            <select id="class_speed" required>
+              <option value="">선택하세요</option>
+              <option>많이 느리다</option>
+              <option>조금 느리다</option>
+              <option>적당하다</option>
+              <option>조금 빠르다</option>
+              <option>많이 빠르다</option>
+            </select>
+          </label>
+
+          <label>
+            실습량 <strong>*</strong>
+            <select id="practice_amount" required>
+              <option value="">선택하세요</option>
+              <option>매우 부족하다</option>
+              <option>조금 부족하다</option>
+              <option>적당하다</option>
+              <option>조금 많다</option>
+              <option>매우 많다</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          추가 설명이 필요한 부분
+          <textarea id="need_more_explanation"></textarea>
+        </label>
+
+        <label>
+          강사에게 바라는 지원 사항
+          <textarea id="instructor_support"></textarea>
+        </label>
+      </section>
+
+      <section class="card">
+        <div class="section-title"><span>9</span><h2>학습환경</h2></div>
+        <p>각 항목의 만족도를 선택하고, 불편한 점이나 개선 의견을 작성해 주세요. 의견은 선택 사항입니다.</p>
+        <div id="learn_env_items"><p role="status">학습환경 목록을 불러오는 중...</p></div>
+      </section>
+      <section class="card">
+        <div class="section-title"><span>10</span><h2>건물 인프라 및 편의 지원</h2></div>
+        <p>각 항목의 만족도를 선택하고, 이용 경험이나 개선 의견을 작성해 주세요. 의견은 선택 사항입니다.</p>
+        <div id="facillities_items"><p role="status">시설 목록을 불러오는 중...</p></div>
+      </section>
+
+      <div class="submit-area">
+        <button type="submit" id="submitBtn">설문 제출하기</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+-- 새 운영 서버에서 관리자 계정으로 실행합니다.
+-- 기존 개발 계정/비밀번호를 가져오지 않습니다.
+-- 아래 비밀번호 자리표시자를 새 무작위 비밀번호로 교체한 뒤 실행합니다.
+CREATE DATABASE counsel_survey_prod
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER 'survey_app'@'localhost'
+    IDENTIFIED BY 'REPLACE_WITH_NEW_RANDOM_HEX_PASSWORD';
+GRANT SELECT, INSERT ON counsel_survey_prod.* TO 'survey_app'@'localhost';
+-- 앱 계정에는 테이블 생성/변경/삭제 또는 사용자 관리 권한을 주지 않습니다.

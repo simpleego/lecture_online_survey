@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+!*.example
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+deploy/*.sql
+deploy/*.json
+
+*.log
+node_modules/

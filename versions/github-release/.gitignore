@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.log
+deploy/*_manifest.json
+deploy/counsel_survey_*.sql
+admin-preview.jpg
+migration-private/
+*.manifest.json

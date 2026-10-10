@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>학습·프로젝트 상담 설문</title><link rel="stylesheet" href="/static/style.css?v=4.0.1"></head>
+<body><header class="hero"><div class="hero-inner"><p class="eyebrow">AX 과정 수강생 상담 · 4차 버전</p><h1>학습·프로젝트 상담 설문</h1><p>현재 학습 상태와 프로젝트 참여 상황을 알려 주세요. 정답은 없으므로 편하게 작성해 주세요.</p></div></header>
+<main class="container"><div id="message" class="message hidden" role="status"></div><form id="surveyForm">
+<section class="card"><h2>기본 정보</h2><div class="grid two"><label>이름 <strong>*</strong><input id="student_name" type="text" maxlength="50" required></label><label>팀명<select id="team_name" disabled><option>불러오는 중...</option></select></label></div></section>
+<div id="dynamicQuestions"><section class="card" role="status">설문항목을 불러오는 중입니다.</section></div>
+<div class="submit-area"><button id="submitBtn" type="submit" disabled>설문 제출하기</button></div></form></main><script src="/static/app.js?v=4.0.1"></script></body></html>

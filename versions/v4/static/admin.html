@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>설문 관리 · 분석</title><link rel="stylesheet" href="/static/style.css?v=4.0.1"><link rel="stylesheet" href="/static/admin.css?v=4.0.1"></head>
+<body>
+<header class="hero"><div class="hero-inner"><p class="eyebrow">4차 버전 · 관리자</p><h1>설문 관리 · 분석</h1><p>설문을 구성하고 응답을 바탕으로 상담과 지원을 준비합니다.</p><a href="/" target="_blank" rel="noopener">설문 작성 화면 보기 ↗</a></div></header>
+<main class="container admin-container">
+<div id="message" class="message hidden" role="status"></div>
+<section id="loginPanel" class="card"><h2>관리자 로그인</h2><form id="loginForm"><label>아이디<input type="text" id="username" autocomplete="username" required></label><label>비밀번호<input type="password" id="password" autocomplete="current-password" required></label><button>로그인</button></form></section>
+<div id="dashboard" class="hidden">
+<div class="toolbar navigation"><div role="tablist" aria-label="관리자 메뉴"><button id="managementTab" type="button" role="tab" aria-controls="managementPanel" aria-selected="false" tabindex="-1">설문관리</button><button id="analysisTab" type="button" role="tab" aria-controls="analysisPanel" aria-selected="true">설문분석</button></div><button id="logout" type="button" class="secondary">로그아웃</button></div>
+<div id="managementPanel" role="tabpanel" aria-labelledby="managementTab" class="hidden">
+<section class="card"><div class="toolbar"><div><h2>기준 설문항목</h2><p id="questionCount"></p></div><div class="actions"><button id="reloadQuestions" type="button" class="secondary">목록 새로고침</button><button id="newQuestion" type="button">새 설문항목 추가</button></div></div><p>항목을 선택해 주제와 답변 구성을 수정할 수 있습니다. 삭제한 항목은 새 설문에서 제외되며 기존 응답은 보존됩니다.</p><div class="table-scroll"><table><thead><tr><th>순서</th><th>설문 구분</th><th>주제</th><th>답변 유형</th><th>필수</th><th>관리</th></tr></thead><tbody id="questionRows"></tbody></table></div></section>
+<section class="card" id="questionEditor"><h2 id="editorTitle">새 설문항목 추가</h2><form id="questionForm">
+<div class="grid two"><label>설문 구분<input id="questionSection" type="text" maxlength="100" value="추가 설문" required></label><label>표시 순서<input id="questionOrder" type="number" min="0" max="100000" value="1000" required></label></div>
+<label>설문 주제<input id="questionTopic" type="text" maxlength="200" required placeholder="예: 앞으로 배우고 싶은 기술은 무엇입니까?"></label>
+<label>답변 유형<select id="questionKind"><option value="single">선택형 · 단일선택</option><option value="multiple">선택형 · 다중선택</option><option value="text">기술형 · 자유 입력</option></select></label>
+<label id="optionsField">선택지<textarea id="questionOptions" placeholder="선택지를 한 줄에 하나씩 입력하세요.&#10;Python&#10;SQL"></textarea><span class="hint">서로 다른 선택지를 2개 이상 입력하세요.</span></label>
+<div class="actions"><label class="inline-check"><input id="questionRequired" type="checkbox"> 필수 응답</label><label class="inline-check"><input id="questionComment" type="checkbox"> 추가 의견 입력 허용</label></div>
+<p id="bindingHint" class="hint"></p><div class="actions"><button id="saveQuestion" type="submit">추가하기</button><button id="cancelQuestion" type="button" class="secondary">입력 초기화</button><button id="deleteQuestion" type="button" class="danger hidden">이 항목 삭제</button></div>
+</form></section></div>
+<div id="analysisPanel" role="tabpanel" aria-labelledby="analysisTab">
+<section class="card"><h2>조회 조건</h2><form id="filterForm" class="filters"><label>이름 검색<input type="text" id="nameFilter" maxlength="50" placeholder="이름 일부 입력"></label><label>팀<select id="teamFilter"><option value="">전체 팀</option></select></label><button>조회</button></form><p>통계는 검색 조건의 전체 응답을 집계합니다. 반복 제출은 각각 1건입니다. 점수 미응답은 평균에서 제외됩니다.</p></section>
+<section class="card"><h2>전체 통계</h2><div id="chartStatus" class="hint" role="status"></div><div id="statistics"></div></section>
+<section class="card"><h2>설문 응답 목록</h2><div class="table-scroll"><table><thead><tr><th>접수번호</th><th>이름</th><th>팀</th><th>제출일</th><th>이해도 / 실습</th><th>상담 확인</th><th>상세</th></tr></thead><tbody id="responseRows"></tbody></table></div><div class="toolbar"><button id="previous" type="button">이전</button><span id="pageInfo"></span><button id="next" type="button">다음</button></div></section>
+<section id="detailPanel" class="card hidden"><div class="toolbar"><h2>개인별 응답 요약</h2><button id="closeDetail" type="button">닫기</button></div><div id="detail"></div></section>
+<section class="card"><h2>환경 및 시설</h2><p>평균은 1~5점 만족도만 포함합니다. 해당 없음·이용하지 않음·제공 없음과 미응답은 별도 집계합니다. 분포 비율은 해당 항목에 답한 응답 수 기준입니다.</p><div id="evaluations"></div></section>
+<section class="card"><h2>설문항목별 응답</h2><p>새 설문 답변은 작성 당시의 주제와 선택지로 표시합니다. 구성 변경 전후의 답변은 구분합니다. 분포 비율은 검색 조건의 전체 응답 수 기준입니다.</p><div id="questionAnalysis"></div></section>
+<section class="card"><h2>상담 확인 기준</h2><p>이해도·실습 수준 1~2점, 복습 거의 없음, AI 활용 4~5점이면서 코드 이해가 낮음, 빠른 수업 속도와 낮은 이해도, 환경·시설 불만족을 표시합니다. 상담을 위한 참고 자료입니다.</p><p>이전 설문의 점수 문항에는 기본 3점이 선택되어 있었습니다. 4차 설문은 기본 답변 없이 작성합니다.</p></section>
+</div></div></main><script src="/static/charts.js?v=4.0.5"></script><script src="/static/admin.js?v=4.0.2"></script></body></html>
